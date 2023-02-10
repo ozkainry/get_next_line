@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:31:42 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/02/09 19:06:04 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/02/10 14:23:58 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@
 # include <stdint.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
+size_t	gnl_strlen(const char *s);
+size_t	gnl_strlen_n(const char *s);
+char	*gnl_strjoin(char *s1, char *s2);
+int		len_after_n(char *str);
+int		is_next_line(char *str);
+char	*gnl_strcpy(char *src, char *dest);
 
 #endif

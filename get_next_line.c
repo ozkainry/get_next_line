@@ -6,7 +6,7 @@
 /*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:30:47 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/02/09 19:15:42 by ozozdemi         ###   ########.fr       */
+/*   Updated: 2023/02/10 15:08:40 by ozozdemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ int	is_next_line(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		printf("LOL");
 	while (str[i])
 	{
-		if (str[i] == "\n")
+		if (str[i] == '\n')
 			return (1);
 		i++;
 	}
@@ -30,27 +32,39 @@ int	is_next_line(char *str)
 char	*get_next_line(int fd)
 {
 	char		buf[BUFFER_SIZE + 1];
-	static char	*stach;
+	static char	*stach = "";
+	static char	*new_stach;
 	char		*line;
-	int			i;
 	int			n;
 
+	n = 1;
 	while (n != 0)
 	{
-		if (is_next_line(buf) == 1)
+		n = read(fd, buf, BUFFER_SIZE);
+		buf[BUFFER_SIZE + 1] = '\0';
+		stach = gnl_strjoin(stach, buf);
+		if (is_next_line(stach) == 1)
+		{
+			new_stach = malloc(sizeof(char) * (len_after_n(stach) + 1));
+			line = malloc(sizeof(char) * (gnl_strlen_n(stach) + 1));
+			gnl_strcpy(stach, line);
+			free(stach);
+			stach = new_stach;
+		}
 	}
-	read(fd, buf, BUFFER_SIZE);
-	return ();
+	return (line);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	// int		n = 1;
-// 	char	buf[50];
+int	main(void)
+{
+	int		fd;
+	// int		n = 1;
+	// char	buf[50];
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	// n = read(fd, buf, 10);
-// 	// write(1, buf, 10);
-// 	printf("%d\n", (int) get_next_line(fd));
-// }
+	fd = open("test.txt", O_RDONLY);
+	// n = read(fd, buf, 10);
+	// printf("Coucou\n");
+	// printf("%d\n", n);
+	// write(1, buf, 10);
+	printf("%s", get_next_line(fd));
+}
