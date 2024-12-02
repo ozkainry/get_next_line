@@ -3,93 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oztozdem <oztozdem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 13:31:30 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/02/10 15:07:51 by ozozdemi         ###   ########.fr       */
+/*   Created: 2024/11/18 11:37:30 by oztozdem          #+#    #+#             */
+/*   Updated: 2024/11/19 14:32:45 by oztozdem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	gnl_strlen(const char *s)
+int	ft_one(char *stash)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (stash[i])
+	{
+		if (stash[i] != -1)
+			return (1);
 		i++;
-	return (i);
+	}
+	return (0);
 }
 
-size_t	gnl_strlen_n(const char *s)
+int	ft_check_new_line(char *stash)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != '\n')
+	while (stash[i])
+	{
+		if (stash[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	strln(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 		i++;
 	return (i);
 }
 
-char	*gnl_strjoin(char *s1, char *s2)
-{
-	char	*def;
-	int		i;
-	int		j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	i = 0;
-	def = (char *)malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2)+ 1));
-	if (def == NULL)
-		return (NULL);
-	while (s1[i])
-	{
-		def[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j])
-	{
-		def[i] = s2[j];
-		i++;
-		j++;
-	}
-	def[i] = '\0';
-	return (def);
-}
-
-int	len_after_n(char *str)
+int	strlnao(char *str, char c)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (str[i])
+	while (str[i] == -1)
 		i++;
-	while (str[i] != '\n')
-		i--;
-	while (str[i])
+	while (str[i] != c)
 	{
 		i++;
 		j++;
 	}
-	j++;
 	return (j);
-}
+}	
 
-char	*gnl_strcpy(char *src, char *dest)
+void	init_and_put_one(char *stash, char c)
 {
 	int	i;
 
 	i = 0;
-	while (src[i] != '\n')
+	while (stash[i] != c)
 	{
-		dest[i] = src[i];
+		stash[i] = -1;
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	if (stash[i] == '\n')
+		stash[i] = -1;
 }

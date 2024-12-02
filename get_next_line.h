@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozozdemi <ozozdemi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oztozdem <oztozdem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 13:31:42 by ozozdemi          #+#    #+#             */
-/*   Updated: 2023/02/10 14:23:58 by ozozdemi         ###   ########.fr       */
+/*   Created: 2024/11/18 11:37:32 by oztozdem          #+#    #+#             */
+/*   Updated: 2024/11/19 15:05:04 by oztozdem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@
 # include <stdint.h>
 
 char	*get_next_line(int fd);
-size_t	gnl_strlen(const char *s);
-size_t	gnl_strlen_n(const char *s);
-char	*gnl_strjoin(char *s1, char *s2);
-int		len_after_n(char *str);
-int		is_next_line(char *str);
-char	*gnl_strcpy(char *src, char *dest);
+char	*ft_condition(char stash[BUFFER_SIZE], int fd, char *buff, int n);
+char	*init_buff(void);
+char	*ft_join_new_line(char *buff, char *stash);
+char	*ft_join(char *buff, char *stash);
+int		ft_one(char *stash);
+int		ft_check_new_line(char *stash);
+int		strln(char *str);
+int		strlnao(char *str, char c);
+void	init_and_put_one(char *stash, char c);
 
 #endif
