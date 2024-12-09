@@ -10,9 +10,26 @@ The **Get Next Line** function provides a robust utility for reading lines of te
 
 ## **Usage**
 
+### **Integration**
+
+To use the **Get Next Line** function in your project, include the header file `get_next_line.h` in the source files where you want to call the function. This ensures the proper declaration of the function and its supporting utilities.
+
+```c
+#include "get_next_line.h"
+```
+
 ### **Compilation**
 
-To include the Get Next Line functionality in your project, simply compile the source files along with your own code. You can customize the buffer size by defining the `BUFFER_SIZE` macro during compilation.
+Once integrated, compile the source files along with your own code. You can customize the buffer size by defining the `BUFFER_SIZE` macro during compilation.
 
 ```bash
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=<size> get_next_line.c get_next_line_utils.c
+```
+
+### **Key Macros**
+
+`BUFFER_SIZE`: Controls the size of the static buffer. Default value is `10`, but it can be redefined during compilation.
+
+### **Cleaning Up**
+
+Ensure that you free the memory allocated for each line returned by `get_next_line` to avoid memory leaks. Static buffers are managed internally and do not require user intervention.
